@@ -1,0 +1,152 @@
+.novo-chamado {
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.novo-chamado-content {
+  padding: 24px 36px;
+}
+
+.novo-chamado-content h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.novo-chamado-content > p {
+  color: #374151;
+  margin-bottom: 16px;
+}
+
+.formulario-chamado {
+  border: 1px solid #9ca3af;
+  border-radius: 8px;
+  padding: 18px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+
+.lado-esquerdo,
+.lado-direito {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-chamado label {
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 7px;
+}
+
+.formulario-chamado input,
+.formulario-chamado select,
+.formulario-chamado textarea {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #9ca3af;
+  padding: 9px 10px;
+  margin-bottom: 26px;
+  color: #111827;
+  font-weight: 600;
+  outline: none;
+}
+
+.formulario-chamado textarea {
+  height: 102px;
+  resize: none;
+}
+
+.upload-area {
+  height: 100px;
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.upload-area input {
+  display: none;
+}
+
+.upload-icon {
+  font-size: 36px;
+  color: #111827;
+}
+
+.upload-area strong,
+.upload-area small {
+  color: #6b7280;
+}
+
+.arquivo-nome {
+  margin-top: 8px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.prioridades {
+  display: flex;
+  gap: 34px;
+  margin-top: 21px;
+}
+
+.prioridade {
+  width: 172px;
+  height: 43px;
+  border-radius: 25px;
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.prioridade.ativa {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.botoes-formulario {
+  margin-top: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.botao-enviar,
+.botao-limpar {
+  height: 42px;
+  border-radius: 22px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao-enviar {
+  width: 172px;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.botao-limpar {
+  width: 172px;
+  background: #374151;
+  color: #ffffff;
+}
+
+.botao-enviar:hover {
+  background: #1d4ed8;
+}
+
+.botao-limpar:hover {
+  background: #1f2937;
+}
