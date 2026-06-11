@@ -1,0 +1,70 @@
+.acompanhar {
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.acompanhar-content {
+  padding: 24px 36px;
+}
+
+.acompanhar-content h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.acompanhar-content > p {
+  color: #374151;
+  margin-bottom: 24px;
+}
+
+.form-acompanhar {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 700px;
+}
+
+.form-acompanhar label {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.campo-protocolo {
+  display: flex;
+  gap: 14px;
+}
+
+.campo-protocolo input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #9ca3af;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.campo-protocolo button {
+  width: 140px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.resultado-acompanhamento {
+  margin-top: 24px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 700px;
+}
+
+.resultado-acompanhamento h3 {
+  color: #0f4778;
+  margin-bottom: 10px;
+}

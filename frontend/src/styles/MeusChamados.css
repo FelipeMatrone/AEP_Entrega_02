@@ -1,0 +1,37 @@
+.meus-chamados {
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.meus-chamados-content {
+  padding: 24px 36px;
+}
+
+.meus-chamados-content h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.meus-chamados-content > p {
+  color: #374151;
+  margin-bottom: 24px;
+}
+
+.lista-chamados {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.chamado-card {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.chamado-card h3 {
+  color: #0f4778;
+  margin-bottom: 10px;
+}

@@ -203,4 +203,8 @@
   .menu button {
     font-size: 14px;
   }
+
+  .card {
+  cursor: pointer;
+}
 }

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
@@ -6,18 +7,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <header className="topbar">
-        <h1 className="logo">AjudaNaMão</h1>
-
-        <nav className="menu">
-          <button onClick={() => navigate("/dashboard")}>Início</button>
-          <button onClick={() => navigate("/novo-chamado")}>Novo Chamado</button>
-          <button onClick={() => navigate("/meus-chamados")}>Meus Chamados</button>
-          <button onClick={() => navigate("/acompanhar")}>Acompanhar</button>
-        </nav>
-
-        <button className="perfil">👤</button>
-      </header>
+      <Header />
 
       <main className="dashboard-content">
         <section className="coluna-esquerda">
@@ -27,15 +17,15 @@ function Dashboard() {
           </section>
 
           <section className="cards">
-            <div className="card">
+            <div className="card" onClick={() => navigate("/novo-chamado")}>
               <p>Abrir Chamado</p>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => navigate("/acompanhar")}>
               <p>Acompanhar Chamado</p>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => navigate("/meus-chamados")}>
               <p>Meus Chamados</p>
             </div>
 
@@ -56,7 +46,6 @@ function Dashboard() {
 
           <div className="avisos">
             <h3>Avisos da Prefeitura</h3>
-
             <ul>
               <li>Coleta de resíduos alterada nesta semana.</li>
               <li>Manutenção programada na iluminação pública.</li>
