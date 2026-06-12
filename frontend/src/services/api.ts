@@ -1,9 +1,27 @@
-const API_BASE_URL = "http://localhost:3333";
+const API_BASE_URL = "/api";
 
-export async function apiRequest(
+export type Usuario = {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  cpf: string;
+  endereco: string;
+};
+
+export type Chamado = {
+  id: number;
+  status: string;
+  categoria: string;
+  descricao: string;
+  localizacao: string;
+  prioridade: string;
+};
+
+export async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
-) {
+): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     headers: {
       "Content-Type": "application/json",
@@ -13,8 +31,12 @@ export async function apiRequest(
   });
 
   if (!response.ok) {
-    throw new Error("Erro ao conectar com o servidor");
+    throw new Error("Nao foi possivel concluir a requisicao.");
   }
 
-  return response.json();
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return response.json() as Promise<T>;
 }

@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import { apiRequest, type Chamado } from "../services/api";
 import "../styles/NovoChamado.css";
 
 function NovoChamado() {
   const navigate = useNavigate();
-
   const [categoria, setCategoria] = useState("");
   const [localizacao, setLocalizacao] = useState("");
   const [descricao, setDescricao] = useState("");
   const [prioridade, setPrioridade] = useState("");
   const [arquivo, setArquivo] = useState<File | null>(null);
+  const [enviando, setEnviando] = useState(false);
 
-  function enviarChamado(event: React.FormEvent) {
+  async function enviarChamado(event: React.FormEvent) {
     event.preventDefault();
 
     if (!categoria || !localizacao || !descricao || !prioridade) {
@@ -20,8 +21,20 @@ function NovoChamado() {
       return;
     }
 
-    alert("Chamado enviado com sucesso!");
-    navigate("/dashboard");
+    setEnviando(true);
+
+    try {
+      const chamado = await apiRequest<Chamado>("/chamados", {
+        method: "POST",
+        body: JSON.stringify({ categoria, localizacao, descricao, prioridade }),
+      });
+      alert(`Chamado ${chamado.id} enviado com sucesso!`);
+      navigate("/meus-chamados");
+    } catch {
+      alert("Não foi possível enviar o chamado.");
+    } finally {
+      setEnviando(false);
+    }
   }
 
   function limparFormulario() {
@@ -35,7 +48,6 @@ function NovoChamado() {
   return (
     <div className="novo-chamado">
       <Header />
-
       <main className="novo-chamado-content">
         <h2>Nova Solicitação</h2>
         <p>Informe sobre o ocorrido preenchendo o formulário abaixo:</p>
@@ -43,7 +55,7 @@ function NovoChamado() {
         <form className="formulario-chamado" onSubmit={enviarChamado}>
           <section className="lado-esquerdo">
             <label>Categoria do Problema:</label>
-            <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+            <select value={categoria} onChange={(event) => setCategoria(event.target.value)}>
               <option value="">Selecione uma categoria</option>
               <option value="Iluminação Pública">Iluminação Pública</option>
               <option value="Buraco na Rua">Buraco na Rua</option>
@@ -54,24 +66,21 @@ function NovoChamado() {
 
             <label>Descrição do Problema:</label>
             <textarea
-              placeholder="Descreva o problema com detalhes para facilitar o atendimento"
+              placeholder="Descreva o problema com detalhes"
               value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
+              onChange={(event) => setDescricao(event.target.value)}
             />
 
             <label>Anexar Fotos ou Documentos</label>
             <label className="upload-area">
-              <span className="upload-icon">⬇</span>
               <strong>Adicionar Arquivo</strong>
-              <small>(PNG, JPG OU PDF até 100MB)</small>
-
+              <small>(PNG, JPG ou PDF)</small>
               <input
                 type="file"
                 accept=".png,.jpg,.jpeg,.pdf"
-                onChange={(e) => setArquivo(e.target.files?.[0] || null)}
+                onChange={(event) => setArquivo(event.target.files?.[0] || null)}
               />
             </label>
-
             {arquivo && <p className="arquivo-nome">{arquivo.name}</p>}
           </section>
 
@@ -81,42 +90,27 @@ function NovoChamado() {
               type="text"
               placeholder="Ex: Rua das Flores, 123 - Centro"
               value={localizacao}
-              onChange={(e) => setLocalizacao(e.target.value)}
+              onChange={(event) => setLocalizacao(event.target.value)}
             />
 
             <label>Prioridade Estimada:</label>
-
             <div className="prioridades">
-              <button
-                type="button"
-                className={prioridade === "Baixa" ? "prioridade ativa" : "prioridade"}
-                onClick={() => setPrioridade("Baixa")}
-              >
-                ↓ Baixa
-              </button>
-
-              <button
-                type="button"
-                className={prioridade === "Média" ? "prioridade ativa" : "prioridade"}
-                onClick={() => setPrioridade("Média")}
-              >
-                = Média
-              </button>
-
-              <button
-                type="button"
-                className={prioridade === "Alta" ? "prioridade ativa" : "prioridade"}
-                onClick={() => setPrioridade("Alta")}
-              >
-                ! Alta
-              </button>
+              {["Baixa", "Média", "Alta"].map((valor) => (
+                <button
+                  type="button"
+                  key={valor}
+                  className={prioridade === valor ? "prioridade ativa" : "prioridade"}
+                  onClick={() => setPrioridade(valor)}
+                >
+                  {valor}
+                </button>
+              ))}
             </div>
 
             <div className="botoes-formulario">
-              <button type="submit" className="botao-enviar">
-                Enviar
+              <button type="submit" className="botao-enviar" disabled={enviando}>
+                {enviando ? "Enviando..." : "Enviar"}
               </button>
-
               <button type="button" className="botao-limpar" onClick={limparFormulario}>
                 Limpar Formulário
               </button>
